@@ -1,4 +1,5 @@
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/theme/images.dart';
 
@@ -21,6 +22,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     MenuButtonData('Салаты'),
     MenuButtonData('Веган'),
   ];
+  List<String> listOfPictures = [
+      AppImages.event1,
+      AppImages.event2,
+      AppImages.event3,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +42,44 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             child: LogoWidget(),
           ),
           ),
-          _MenuButtonListWidget(menuButton: listOfCategories)
+          _MenuButtonListWidget(menuButton: listOfCategories),
+          CarouselSlider.builder(
+              options: CarouselOptions(
+                  viewportFraction: 1,
+                  height: 350,
+                  autoPlay: true,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.height,
+              ),
+              itemCount: listOfPictures.length,
+              itemBuilder: (context, index, realIndex) {
+                final urlImage = listOfPictures[index];
+                return buildImage(urlImage, index);
+              },
+    ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: 'Поиск',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+  Widget buildImage(String urlImage, int index) => Container(
+    margin: EdgeInsets.symmetric(horizontal: 0),
+    color: Colors.grey,
+    child: Image.asset(
+      urlImage,
+      fit: BoxFit.cover,
+    )
+  );
 }
 
 class _MenuButtonWidget extends StatelessWidget {
