@@ -95,91 +95,98 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     ),
   ];
 
+  int _selectedTab = 0;
+
+  void onSelectTab(int index){
+    if (_selectedTab == index) return;
+    setState(() {
+      _selectedTab = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        shrinkWrap: true,
-        children: [
-          Container(
-          height: 60,
-          width: double.infinity,
-          alignment: Alignment.center,
-          color:  Color.fromRGBO(80, 166, 132, 1),
-          child: Center(
-            child: LogoWidget(),
-          ),
-          ),
-          _MenuButtonListWidget(menuButton: listOfCategories),
-          CarouselSlider.builder(
-              options: CarouselOptions(
-                  viewportFraction: 1,
-                  height: 350,
-                  autoPlay: true,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-              ),
-              itemCount: listOfPictures.length,
-              itemBuilder: (context, index, realIndex) {
-                final urlImage = listOfPictures[index];
-                return buildImage(urlImage, index);
-              },
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      shrinkWrap: true,
+      children: [
+        Container(
+        height: 60,
+        width: double.infinity,
+        alignment: Alignment.center,
+        color:  Color.fromRGBO(80, 166, 132, 1),
+        child: Center(
+          child: LogoWidget(),
+        ),
+        ),
+        _MenuButtonListWidget(menuButton: listOfCategories),
+        CarouselSlider.builder(
+            options: CarouselOptions(
+                viewportFraction: 1,
+                height: 350,
+                autoPlay: true,
+            ),
+            itemCount: listOfPictures.length,
+            itemBuilder: (context, index, realIndex) {
+              final urlImage = listOfPictures[index];
+              return buildImage(urlImage, index);
+            },
     ),
-          _SearchWidget(),
-          ListView.builder(
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-            itemCount: _listOfPizzas.length,
-              itemBuilder: (BuildContext context, int index){
-              final pizza = _listOfPizzas[index];
-              return Padding(
-                padding: const EdgeInsets.only(top: 10,bottom: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                    Image(image: AssetImage(pizza.imageName),),
-                    SizedBox(width: 10,),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('${pizza.title}',
-                            style: TextStyle(fontSize:18, fontWeight: FontWeight.bold),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,),
-                          SizedBox(height: 10,),
-                          Text('${pizza.description}',
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,),
-                          SizedBox(height: 5,),
-                          OutlinedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Colors.red),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    side: BorderSide(color: Colors.red),
-                                  ),
-                                )
-                            ),
-                            onPressed: (){},
-                            child:
-                            Text('${pizza.price}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
+        _SearchWidget(),
+        ListView.builder(
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+          itemCount: _listOfPizzas.length,
+            itemBuilder: (BuildContext context, int index){
+            final pizza = _listOfPizzas[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  Image(image: AssetImage(pizza.imageName),),
+                  SizedBox(width: 10,),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('${pizza.title}',
+                          style: TextStyle(fontSize:18, fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,),
+                        SizedBox(height: 10,),
+                        Text('${pizza.description}',
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,),
+                        SizedBox(height: 5,),
+                        OutlinedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.red),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  side: BorderSide(color: Colors.red),
+                                ),
+                              )
+                          ),
+                          onPressed: (){},
+                          child:
+                          Text('${pizza.price}',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
                     ),
-                  ],
-                ),
-              );
-              }
-          ),
+                  ),
+                ],
+              ),
+            );
+            }
+        ),
 
-        ],
-      ),
+      ],
+        ),
     );
   }
   Widget buildImage(String urlImage, int index) => Container(
