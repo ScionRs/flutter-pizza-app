@@ -4,14 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/theme/images.dart';
 
-class PizzaData{
-  final String imageName;
-  final String title;
-  final String description;
-  final String price;
+import '../Data/pizza_data.dart';
 
-  PizzaData({required this.imageName,required this.title,required this.description,required this.price});
-}
 
 class MainScreenWidget extends StatefulWidget {
   MainScreenWidget({Key? key}) : super(key: key);
