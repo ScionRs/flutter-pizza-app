@@ -1,6 +1,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/personal_page/detail_page.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/theme/images.dart';
 
@@ -134,46 +135,55 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           itemCount: _listOfPizzas.length,
             itemBuilder: (BuildContext context, int index){
             final pizza = _listOfPizzas[index];
-            return Padding(
-              padding: const EdgeInsets.only(top: 10,bottom: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  Image(image: AssetImage(pizza.imageName),),
-                  SizedBox(width: 10,),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('${pizza.title}',
-                          style: TextStyle(fontSize:18, fontWeight: FontWeight.bold),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,),
-                        SizedBox(height: 10,),
-                        Text('${pizza.description}',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,),
-                        SizedBox(height: 5,),
-                        OutlinedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.red),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  side: BorderSide(color: Colors.red),
-                                ),
-                              )
-                          ),
-                          onPressed: (){},
-                          child:
-                          Text('${pizza.price}',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      ],
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        DetailScreen(pizzaData: pizza),
+                ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10,bottom: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    Image(image: AssetImage(pizza.imageName),),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${pizza.title}',
+                            style: TextStyle(fontSize:18, fontWeight: FontWeight.bold),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,),
+                          SizedBox(height: 10,),
+                          Text('${pizza.description}',
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,),
+                          SizedBox(height: 5,),
+                          OutlinedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Colors.red),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    side: BorderSide(color: Colors.red),
+                                  ),
+                                )
+                            ),
+                            onPressed: (){},
+                            child:
+                            Text('${pizza.price}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
             }
