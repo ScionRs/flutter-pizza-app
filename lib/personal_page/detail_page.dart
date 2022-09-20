@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
 
@@ -45,6 +46,30 @@ class DetailScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("${pizzaData.title}",
+                      style: TextStyle(
+                          color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                      ),
+             ),
+                    SizedBox(height: 10.0),
+                    Text("${pizzaData.description}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blueGrey
+                      ),
+                    textAlign: TextAlign.start,)
+                  ],
+                ),
               ),
             ],
           ),

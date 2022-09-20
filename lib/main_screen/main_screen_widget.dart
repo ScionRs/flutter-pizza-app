@@ -37,7 +37,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     PizzaData(
       imageName: AppImages.pizza1,
       title: 'Мясной микс',
-      description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
+      description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
       price: 'от 519 ₽'
     ),
     PizzaData(
@@ -67,7 +67,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     PizzaData(
         imageName: AppImages.pizza1,
         title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
         price: 'от 519 ₽'
     ),
     PizzaData(
