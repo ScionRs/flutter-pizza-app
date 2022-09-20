@@ -29,12 +29,32 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: OutlinedButton(
+                      child:
+                      /*OutlinedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(),
+                                ),
+                            )
+                          ),
                           onPressed: (){
                             Navigator.pop(context);
                           },
-                          child: Icon(Icons.arrow_left)
-                      ),
+                          child: Icon(Icons.arrow_left,)
+                      ),*/
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.arrow_circle_left_outlined,size: 45.0, color: Colors.white),
+                        style: ElevatedButton.styleFrom(
+                          shape: CircleBorder(),
+                          primary: Colors.transparent, // <-- Button color
+                          onPrimary: Colors.red, // <-- Splash color
+                        ),
+                      )
                     ),
                     Align(
                         alignment: Alignment.center,
@@ -42,10 +62,16 @@ class DetailScreen extends StatelessWidget {
                   ]
                 ),
               ),
-              Image(image: AssetImage(pizzaData.imageName,),
+              /*Image(image: AssetImage(pizzaData.imageDetail,),
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
+              ),*/
+              Image.network(
+                pizzaData.imageDetail,
+                width: double.infinity,
+                height: 300,
+                fit: BoxFit.contain,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),

@@ -36,56 +36,72 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final _listOfPizzas = [
     PizzaData(
       imageName: AppImages.pizza1,
+      imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
       title: 'Мясной микс',
       description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
       price: 'от 519 ₽'
     ),
     PizzaData(
         imageName: AppImages.pizza1,
-        title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
-        price: 'от 519 ₽'
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
-        price: 'от 519 ₽'
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
-        price: 'от 519 ₽'
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
-        price: 'от 519 ₽'
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
         title: 'Мясной микс',
         description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
         price: 'от 519 ₽'
     ),
     PizzaData(
         imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
         title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
         price: 'от 519 ₽'
     ),
     PizzaData(
         imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
         title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
         price: 'от 519 ₽'
     ),
     PizzaData(
         imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
         title: 'Мясной микс',
-        description: 'Пепперони фреш, Пикантная пепперони,увеличенная порция моцареллы, томаты,фирменный томатный соус',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
+        price: 'от 519 ₽'
+    ),
+    PizzaData(
+        imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+        title: 'Мясной микс',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
+        price: 'от 519 ₽'
+    ),
+    PizzaData(
+        imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+        title: 'Мясной микс',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
+        price: 'от 519 ₽'
+    ),
+    PizzaData(
+        imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+        title: 'Мясной микс',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
+        price: 'от 519 ₽'
+    ),
+    PizzaData(
+        imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+        title: 'Мясной микс',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
+        price: 'от 519 ₽'
+    ),
+    PizzaData(
+        imageName: AppImages.pizza1,
+        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+        title: 'Мясной микс',
+        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
         price: 'от 519 ₽'
     ),
   ];
