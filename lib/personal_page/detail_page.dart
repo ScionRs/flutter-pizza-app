@@ -167,6 +167,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 10.0),
+                    Text('Добавить в пиццу:'),
+                    SizedBox(height: 10.0),
+                    SliverGrid.count(
+                      crossAxisCount: 2,
+                      children: [
+                            
+                      ],
+
+                    )
                   ],
                 ),
               ),
