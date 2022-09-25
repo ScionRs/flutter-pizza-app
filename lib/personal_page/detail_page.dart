@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_app/Data/ingredient_data.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
 import 'package:pizza_app/theme/colors.dart';
+import 'package:pizza_app/widgets/IngredientItem.dart';
 import 'package:select_card/select_card.dart';
 
 import '../main_screen/main_screen_widget.dart';
@@ -211,16 +212,35 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10.0),
-                    Text('Добавить в пиццу:'),
-                    SizedBox(height: 10.0),
-                    SliverGrid.count(
-                      crossAxisCount: 2,
-                      children: [
-
-                      ],
-
-                    )
+                    SizedBox(height: 15.0),
+                    _AddIngredientsTitleWidget(),
+                    SizedBox(height: 15.0),
+                    GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: _listOfIngredients.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 0.56,
+                            crossAxisSpacing: 2,
+                            mainAxisSpacing: 2
+                        ),
+                        itemBuilder: (context, index){
+                          return IngredientItem(
+                              key: Key(_listOfIngredients[index].price.toString()),
+                              ingredientItem: _listOfIngredients[index],
+                              isSelected: (bool value) {
+                                setState(() {
+                                  if (value){
+                                    selectedList.add(_listOfIngredients[index]);
+                                  } else {
+                                    selectedList.remove(_listOfIngredients[index]);
+                                  }
+                                });
+                              }
+                          );
+                        }
+                    ),
                   ],
                 ),
               ),
@@ -230,6 +250,20 @@ class _DetailScreenState extends State<DetailScreen> {
       ]
       ),
     );
+  }
+}
+
+class _AddIngredientsTitleWidget extends StatelessWidget {
+  const _AddIngredientsTitleWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('Добавить в пиццу',
+    style: TextStyle(
+      fontSize: 18,
+    ));
   }
 }
 
