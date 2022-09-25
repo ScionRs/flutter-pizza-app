@@ -28,7 +28,7 @@ class _IngredientItem extends State<IngredientItem> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          border: isSelected ? Border.all(color: Colors.yellow) : Border.all(color: Colors.transparent),
+          border: isSelected ? Border.all(color: Colors.yellow, width: 1.5) : Border.all(color: Colors.transparent,  width: 1.5),
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
           boxShadow: [
             BoxShadow(

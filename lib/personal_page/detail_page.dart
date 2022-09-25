@@ -48,9 +48,51 @@ final _listOfIngredients = [
   ),
   IngredientOptionalData(
     id:5,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA62D5D6027',
+    title: 'Острая чоризо',
+    price: 79,
+  ),
+  IngredientOptionalData(
+    id:6,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6A277BB50',
+    title: 'Сыр блю чиз',
+    price: 79,
+  ),
+  IngredientOptionalData(
+    id:7,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA6B0FFC349',
+    title: 'Кубики брынзы',
+    price: 79,
+  ),
+  IngredientOptionalData(
+    id:8,
     imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3',
     title: 'Пикантная пепперони',
     price: 79,
+  ),
+  IngredientOptionalData(
+    id:9,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA67259A324',
+    title: 'Шампиньоны',
+    price: 59,
+  ),
+  IngredientOptionalData(
+    id:10,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA63F774C1B',
+    title: 'Сладкий перец',
+    price: 59,
+  ),
+  IngredientOptionalData(
+    id:11,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA60AE6464C',
+    title: 'Красный лук',
+    price: 59,
+  ),
+  IngredientOptionalData(
+    id:12,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0',
+    title: 'Сочные анансы',
+    price: 59,
   ),
 ];
 
@@ -79,6 +121,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+          physics: BouncingScrollPhysics(),
         children: [
           Container(
           width: double.infinity,
@@ -218,12 +261,13 @@ class _DetailScreenState extends State<DetailScreen> {
                     GridView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
+                        physics: ScrollPhysics(),
                         itemCount: _listOfIngredients.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             childAspectRatio: 0.56,
-                            crossAxisSpacing: 2,
-                            mainAxisSpacing: 2
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
                         ),
                         itemBuilder: (context, index){
                           return IngredientItem(
