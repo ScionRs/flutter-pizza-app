@@ -1,8 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/Data/ingredient_data.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
 import 'package:pizza_app/theme/colors.dart';
+import 'package:select_card/select_card.dart';
 
 import '../main_screen/main_screen_widget.dart';
 
@@ -18,9 +20,45 @@ const List<Widget> pizzaDough = <Widget>[
   Text('Традиционное'),
 ];
 
+final _listOfIngredients = [
+  IngredientOptionalData(
+    id:1,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png',
+    title: 'Сливочная моцарелла',
+    price: 79,
+  ),
+  IngredientOptionalData(
+    id:2,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/370dac9ed21e4bffaf9bc2618d258734.png',
+    title: 'Итальянские травы',
+    price: 39,
+  ),
+  IngredientOptionalData(
+    id:3,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA61B9A8D61',
+    title: 'Ветчина',
+    price: 79,
+  ),
+  IngredientOptionalData(
+    id:4,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/b2f3a5d5afe44516a93cfc0d2ee60088.png',
+    title: 'Митболы',
+    price: 79,
+  ),
+  IngredientOptionalData(
+    id:5,
+    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3',
+    title: 'Пикантная пепперони',
+    price: 79,
+  ),
+];
+
+
+
 class DetailScreen extends StatefulWidget {
   DetailScreen({Key? key, required this.pizzaData}) : super(key: key);
   final PizzaData pizzaData;
+
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -29,6 +67,12 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   final List<bool> _selectedPizzaSize = <bool>[false,true,false];
   final List<bool> _selectedPizzaDough = <bool>[true,false];
+  List<IngredientOptionalData> selectedList = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +217,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     SliverGrid.count(
                       crossAxisCount: 2,
                       children: [
-                            
+
                       ],
 
                     )
