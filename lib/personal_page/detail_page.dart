@@ -293,6 +293,23 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ]
       ),
+      bottomNavigationBar: OutlinedButton(
+        style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(Size(70, 70)),
+            backgroundColor: MaterialStateProperty.all(Colors.red),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                side: BorderSide(color: Colors.red),
+              ),
+            )
+        ),
+        onPressed: (){},
+        child:
+        Text('В корзину за',
+          style: TextStyle(color: Colors.white,
+          fontSize: 20.0),
+        ),
+      ),
     );
   }
 }
