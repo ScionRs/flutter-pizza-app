@@ -105,9 +105,20 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  final List<bool> _selectedPizzaSize = <bool>[false,true,false];
-  final List<bool> _selectedPizzaDough = <bool>[true,false];
+  final List<bool> _selectedPizzaSize = <bool>[false,true,false]; // Размер пиццы
+  final List<bool> _selectedPizzaDough = <bool>[true,false]; // Тесто
   List<IngredientOptionalData> selectedList = [];
+  List<int> priceSelectedList = [1]; // добавляю 1 или получаю BadState
+  int result = 0;
+  /*
+  Все это суммирую
+   */
+  int reduceSum(){
+    setState(() {
+    });
+    result = priceSelectedList.reduce((value, element) => value + element);
+    return result;
+  }
 
 
   @override
@@ -138,20 +149,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child:
-                      /*OutlinedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(),
-                                ),
-                            )
-                          ),
-                          onPressed: (){
-                            Navigator.pop(context);
-                          },
-                          child: Icon(Icons.arrow_left,)
-                      ),*/
                       ElevatedButton(
                         onPressed: (){
                           Navigator.pop(context);
@@ -171,11 +168,6 @@ class _DetailScreenState extends State<DetailScreen> {
                   ]
                 ),
               ),
-              /*Image(image: AssetImage(pizzaData.imageDetail,),
-                width: double.infinity,
-                height: 300,
-                fit: BoxFit.cover,
-              ),*/
               Image.network(
                 widget.pizzaData.imageDetail,
                 width: double.infinity,
@@ -277,6 +269,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 setState(() {
                                   if (value){
                                     selectedList.add(_listOfIngredients[index]);
+                                    priceSelectedList.add(int.parse(_listOfIngredients[index].price.toString()));
                                   } else {
                                     selectedList.remove(_listOfIngredients[index]);
                                   }
@@ -305,7 +298,7 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
         onPressed: (){},
         child:
-        Text('В корзину за ${context.watch<IngredientProvider>().resultSelectPrice}',
+        Text('В корзину за ${reduceSum()}',
           style: TextStyle(color: Colors.white,
           fontSize: 20.0),
         ),
