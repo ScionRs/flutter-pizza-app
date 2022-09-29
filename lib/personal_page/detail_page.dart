@@ -1,14 +1,11 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/Data/ingredient_data.dart';
+import 'package:pizza_app/Data/ingredient_provider.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/widgets/IngredientItem.dart';
-import 'package:select_card/select_card.dart';
-
 import '../main_screen/main_screen_widget.dart';
-
+import 'package:provider/provider.dart';
 
 const List<Widget> pizzaSize = <Widget>[
   Text('Маленькая'),
@@ -112,10 +109,13 @@ class _DetailScreenState extends State<DetailScreen> {
   final List<bool> _selectedPizzaDough = <bool>[true,false];
   List<IngredientOptionalData> selectedList = [];
 
+
   @override
   void initState() {
+    //final result = selectedList.reduce((value, element) => value + element.price);
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +305,7 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
         onPressed: (){},
         child:
-        Text('В корзину за',
+        Text('В корзину за ${context.watch<IngredientProvider>().resultSelectPrice}',
           style: TextStyle(color: Colors.white,
           fontSize: 20.0),
         ),
