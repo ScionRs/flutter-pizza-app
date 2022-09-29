@@ -99,7 +99,6 @@ class DetailScreen extends StatefulWidget {
   DetailScreen({Key? key, required this.pizzaData}) : super(key: key);
   final PizzaData pizzaData;
 
-
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
@@ -108,8 +107,9 @@ class _DetailScreenState extends State<DetailScreen> {
   final List<bool> _selectedPizzaSize = <bool>[false,true,false]; // Размер пиццы
   final List<bool> _selectedPizzaDough = <bool>[true,false]; // Тесто
   List<IngredientOptionalData> selectedList = [];
-  List<int> priceSelectedList = [1]; // добавляю 1 или получаю BadState
+  List<int> priceSelectedList = [0]; // добавляю 1 или получаю BadState
   int result = 0;
+  int pizzaPrice = 0;
   /*
   Все это суммирую
    */
@@ -117,13 +117,14 @@ class _DetailScreenState extends State<DetailScreen> {
     setState(() {
     });
     result = priceSelectedList.reduce((value, element) => value + element);
-    return result;
+    return pizzaPrice + result;
   }
 
 
   @override
   void initState() {
     //final result = selectedList.reduce((value, element) => value + element.price);
+    result = widget.pizzaData.price;
     super.initState();
   }
 
@@ -268,10 +269,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               isSelected: (bool value) {
                                 setState(() {
                                   if (value){
+                                    pizzaPrice = int.parse(widget.pizzaData.price.toString());
                                     selectedList.add(_listOfIngredients[index]);
                                     priceSelectedList.add(int.parse(_listOfIngredients[index].price.toString()));
                                   } else {
                                     selectedList.remove(_listOfIngredients[index]);
+                                    priceSelectedList.remove(int.parse(_listOfIngredients[index].price.toString()));
                                   }
                                 });
                               }
@@ -286,26 +289,38 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ]
       ),
-      bottomNavigationBar: OutlinedButton(
-        style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(Size(70, 70)),
-            backgroundColor: MaterialStateProperty.all(Colors.red),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                side: BorderSide(color: Colors.red),
-              ),
-            )
-        ),
-        onPressed: (){},
-        child:
-        Text('В корзину за ${reduceSum()}',
-          style: TextStyle(color: Colors.white,
-          fontSize: 20.0),
-        ),
+      bottomNavigationBar: _BottomButton(),
+    );
+  }
+}
+
+class _BottomButton extends StatelessWidget {
+  const _BottomButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(Size(70, 70)),
+          backgroundColor: MaterialStateProperty.all(Colors.red),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              side: BorderSide(color: Colors.red),
+            ),
+          )
+      ),
+      onPressed: (){},
+      child:
+      Text('В корзину за ',
+        style: TextStyle(color: Colors.white,
+            fontSize: 20.0),
       ),
     );
   }
 }
+
 
 class _AddIngredientsTitleWidget extends StatelessWidget {
   const _AddIngredientsTitleWidget({

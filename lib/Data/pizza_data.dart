@@ -5,7 +5,7 @@ class PizzaData{
   final String imageDetail;
   final String title;
   final String description;
-  final String price;
+  final int price;
 
   PizzaData({required this.imageName,required this.imageDetail,required this.title,required this.description,required this.price});
 }
