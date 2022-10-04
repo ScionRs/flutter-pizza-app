@@ -13,6 +13,8 @@ const List<Widget> pizzaSize = <Widget>[
   Text('Верхняя'),
 ];
 
+const List<int> pizzaSizePrice = [399, 420, 600];
+
 const List<Widget> pizzaDough = <Widget>[
   Text('Тонкое'),
   Text('Традиционное'),
@@ -115,16 +117,16 @@ class _DetailScreenState extends State<DetailScreen> {
    */
   int reduceSum(){
     setState(() {
+      result = priceSelectedList.reduce((value, element) => value + element);
     });
-    result = priceSelectedList.reduce((value, element) => value + element);
-    return pizzaPrice + result;
+    return result;
+    //return pizzaPrice;
   }
 
 
   @override
   void initState() {
     //final result = selectedList.reduce((value, element) => value + element.price);
-    result = widget.pizzaData.price;
     super.initState();
   }
 
@@ -197,6 +199,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               setState((){
                                 for (int i = 0; i < _selectedPizzaSize.length; i++) {
                                   _selectedPizzaSize[i] = i == index;
+                                  //pizzaPrice = pizzaSizePrice[i];
+                                  if(_selectedPizzaSize[i] = i == index){
+                                    priceSelectedList.add(pizzaSizePrice[i]);
+                                  } else {
+                                    priceSelectedList.remove(pizzaSizePrice[i]);
+                                  }
                                 }
                               });
                             },
@@ -269,7 +277,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               isSelected: (bool value) {
                                 setState(() {
                                   if (value){
-                                    pizzaPrice = int.parse(widget.pizzaData.price.toString());
+                                    //pizzaPrice = int.parse(widget.pizzaData.price.toString());
                                     selectedList.add(_listOfIngredients[index]);
                                     priceSelectedList.add(int.parse(_listOfIngredients[index].price.toString()));
                                   } else {
@@ -289,37 +297,28 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ]
       ),
-      bottomNavigationBar: _BottomButton(),
-    );
-  }
-}
-
-class _BottomButton extends StatelessWidget {
-  const _BottomButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(Size(70, 70)),
-          backgroundColor: MaterialStateProperty.all(Colors.red),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              side: BorderSide(color: Colors.red),
-            ),
-          )
-      ),
-      onPressed: (){},
-      child:
-      Text('В корзину за ',
-        style: TextStyle(color: Colors.white,
-            fontSize: 20.0),
+      bottomNavigationBar: OutlinedButton(
+        style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(Size(70, 70)),
+            backgroundColor: MaterialStateProperty.all(Colors.red),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                side: BorderSide(color: Colors.red),
+              ),
+            )
+        ),
+        onPressed: (){},
+        child:
+        Text('В корзину за ${reduceSum()}',
+          style: TextStyle(color: Colors.white,
+              fontSize: 20.0),
+        ),
       ),
     );
   }
 }
+
+
 
 
 class _AddIngredientsTitleWidget extends StatelessWidget {
