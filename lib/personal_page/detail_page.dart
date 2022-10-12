@@ -201,7 +201,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                   _selectedPizzaSize[i] = i == index;
                                   //pizzaPrice = pizzaSizePrice[i];
                                   if(_selectedPizzaSize[i] = i == index){
-                                    priceSelectedList.add(pizzaSizePrice[i]);
+                                    if(priceSelectedList.contains(pizzaSizePrice[i])){
+                                      priceSelectedList.add(0);
+                                    } else{
+                                      priceSelectedList.add(pizzaSizePrice[i]);
+                                    }
                                   } else {
                                     priceSelectedList.remove(pizzaSizePrice[i]);
                                   }
