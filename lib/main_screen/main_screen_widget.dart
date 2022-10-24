@@ -1,6 +1,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/api/api_client.dart';
 import 'package:pizza_app/personal_page/detail_page.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/theme/images.dart';
@@ -33,6 +34,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       AppImages.event3,
   ];
 
+  /*
   final _listOfPizzas = [
     PizzaData(
       imageName: AppImages.pizza1,
@@ -98,7 +100,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         price: 519
     ),
   ];
-
+*/
 
   int _selectedTab = 0;
 
@@ -107,6 +109,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     setState(() {
       _selectedTab = index;
     });
+  }
+
+
+  Future<List<PizzaData>> _listOfPizzas = ApiClient().getPizzas();
+
+
+
+  @override
+  void initState(){
+    super.initState();
   }
 
   @override
@@ -147,11 +159,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             final pizza = _listOfPizzas[index];
             return GestureDetector(
               onTap: () {
-                Navigator.push(context,
+              /*  Navigator.push(context,
                 MaterialPageRoute(
                     builder: (context) =>
                         DetailScreen(pizzaData: pizza),
-                ));
+                ));*/
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 10,bottom: 10),

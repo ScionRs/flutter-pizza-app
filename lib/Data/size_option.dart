@@ -9,4 +9,7 @@ class SizeOptions{
   final int price;
 
   SizeOptions({required this.size, required this.description, required this.price});
+  factory SizeOptions.fromJson(Map<String, dynamic> json) =>
+      _$SizeOptionsFromJson(json);
+  Map<String, dynamic> toJson() => _$SizeOptionsToJson(this);
 }

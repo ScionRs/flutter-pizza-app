@@ -11,5 +11,7 @@ class IngredientOptionalData{
   final int price;
 
   IngredientOptionalData({required this.id, required this.imgName, required this.title, required this.price});
-
+  factory IngredientOptionalData.fromJson(Map<String, dynamic> json) =>
+      _$IngredientOptionalDataFromJson(json);
+  Map<String, dynamic> toJson() => _$IngredientOptionalDataToJson(this);
 }

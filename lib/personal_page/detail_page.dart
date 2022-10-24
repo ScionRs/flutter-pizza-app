@@ -6,7 +6,7 @@ import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/widgets/IngredientItem.dart';
 import '../main_screen/main_screen_widget.dart';
 import 'package:provider/provider.dart';
-
+/*
 const List<Widget> pizzaSize = <Widget>[
   Text('Маленькая'),
   Text('Средняя'),
@@ -19,6 +19,7 @@ const List<Widget> pizzaDough = <Widget>[
   Text('Тонкое'),
   Text('Традиционное'),
 ];
+
 
 final _listOfIngredients = [
   IngredientOptionalData(
@@ -380,3 +381,4 @@ class _DescriptionWidget extends StatelessWidget {
     );
   }
 }
+*/
