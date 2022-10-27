@@ -1,10 +1,13 @@
 
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/api/api_client.dart';
 import 'package:pizza_app/personal_page/detail_page.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/theme/images.dart';
+import 'package:http/http.dart' as http;
 
 import '../Data/pizza_data.dart';
 
@@ -111,15 +114,37 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     });
   }
 
-
-  Future<List<PizzaData>> _listOfPizzas = ApiClient().getPizzas();
-
-
-
-  @override
-  void initState(){
-    super.initState();
+  /*
+   Future<List<PizzaData>> getPizzas() async {
+    List<PizzaData> products = [];
+    final response = await http.get(Uri.parse('http://localhost:3000/pizza'));
+    var data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      products = data.map((e) => PizzaData.fromJson(e)).toList();
+      return products;
+    } else {
+      products = data.map((e) => PizzaData.fromJson(e)).toList();
+      return products;
+    }
   }
+  */
+
+  List<PizzaData> allPizzasFromJson(String str) {
+    final jsonData = json.decode(str);
+    print(jsonData);
+    print(new List<PizzaData>.from(jsonData.map((x) => PizzaData.fromJson(x))));
+    return new List<PizzaData>.from(jsonData.map((x) => PizzaData.fromJson(x)));
+  }
+
+  Future<List<PizzaData>> getAllPizzas() async {
+    final response = await http.get(Uri.parse('http://localhost:3000/pizza'));
+    print(response.body);
+    return allPizzasFromJson(response.body);
+  }
+
+  //final Future<List<PizzaData>> _listOfPizzas = ApiClient().getPizzas();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -151,70 +176,86 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             },
     ),
         _SearchWidget(),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-          itemCount: _listOfPizzas.length,
-            itemBuilder: (BuildContext context, int index){
-            final pizza = _listOfPizzas[index];
-            return GestureDetector(
-              onTap: () {
-              /*  Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        DetailScreen(pizzaData: pizza),
-                ));*/
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10,bottom: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                    Image(image: AssetImage(pizza.imageName),),
-                    SizedBox(width: 10,),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('${pizza.title}',
-                            style: TextStyle(fontSize:18, fontWeight: FontWeight.bold),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,),
-                          SizedBox(height: 10,),
-                          Text('${pizza.description}',
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,),
-                          SizedBox(height: 5,),
-                          OutlinedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Colors.red),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    side: BorderSide(color: Colors.red),
-                                  ),
-                                )
-                            ),
-                            onPressed: (){},
-                            child:
-                            Text('${pizza.price.toString()}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-            }
-        ),
+        FutureBuilder<List<PizzaData>>(
+            future: getAllPizzas(),
+            builder: (context, snapshot){
+              if(snapshot.hasError){
+                return Text('Error: ${snapshot.error} - ${snapshot.stackTrace}');
+              }
+              if(snapshot.hasData){
+                return Text('${snapshot.data![0].title} ${snapshot.data![0].size[0].size} ${snapshot.data![0].ingredients[0].title}');
+              } else {
+                return Text('Loading');
+              }
 
+              /*
+              if (snapshot.hasData) {
+                List<PizzaData> products = snapshot.data;
+                print(products);
+                return buildPizza(products);
+              } else {
+                return const Text("Ошибка соединения");
+              }
+               */
+            }),
       ],
         ),
     );
   }
+
+  /*
+  Widget buildPizza(List<PizzaData> pizza) => ListView.builder(
+      shrinkWrap: true,
+      physics: BouncingScrollPhysics(),
+      itemCount: pizza.length,
+      itemBuilder: (BuildContext context, int index){
+        final pizzaItem = pizza[index];
+        return  Padding(
+            padding: const EdgeInsets.only(top: 10,bottom: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                Image(image: AssetImage(pizzaItem.imageName),),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${pizzaItem.title}',
+                        style: TextStyle(fontSize:18, fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,),
+                      SizedBox(height: 10,),
+                      Text('${pizzaItem.description}',
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,),
+                      SizedBox(height: 5,),
+                      OutlinedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.red),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                                side: BorderSide(color: Colors.red),
+                              ),
+                            )
+                        ),
+                        onPressed: (){},
+                        child:
+                        Text('${pizzaItem.price.toString()}',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+        );
+      }
+  );
+*/
+
   Widget buildImage(String urlImage, int index) => Container(
     margin: EdgeInsets.symmetric(horizontal: 0),
     color: Colors.grey,

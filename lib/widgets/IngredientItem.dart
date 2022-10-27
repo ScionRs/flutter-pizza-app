@@ -121,7 +121,7 @@ class _IngredientItem extends State<IngredientItem> {
           ),
           child: Column(
             children: [
-              Stack(
+              /*Stack(
                 children: <Widget>[
                   Image.network(
                     widget.ingredientItem.imgName,
@@ -141,7 +141,7 @@ class _IngredientItem extends State<IngredientItem> {
                       : Container(),
 
                 ],
-              ),
+              ),*/
               Text('${widget.ingredientItem.title}',textAlign: TextAlign.center,),
               SizedBox(height: 10.0,),
               Text('${widget.ingredientItem.price} ₽', textAlign: TextAlign.center,),
