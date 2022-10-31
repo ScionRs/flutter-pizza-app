@@ -6,9 +6,9 @@ import 'package:pizza_app/Data/size_option.dart';
 
 @JsonSerializable()
 class PizzaData{
-  //final String id;
-  //final String imageName;
-  //final String imageDetail;
+  final String id;
+  final String imageName;
+  final String imageDetail;
   final String title;
   final String description;
   final int price;
@@ -17,7 +17,7 @@ class PizzaData{
 
 
 
-  PizzaData({/*required this.id,*/ /* required this.imageName,required this.imageDetail,*/ required this.title,required this.description,required this.price, required this.size, required this.ingredients});
+  PizzaData({required this.id,  required this.imageName,required this.imageDetail, required this.title,required this.description,required this.price, required this.size, required this.ingredients});
   factory PizzaData.fromJson(Map<String, dynamic> parsedJson){
     var listSize = parsedJson['size'] as List;
     var listIngredients = parsedJson['ingredients'] as List;
@@ -25,6 +25,9 @@ class PizzaData{
     List<IngredientOptionalData> ingredientsList = listIngredients.map((e) => IngredientOptionalData.fromJson(e)).toList();
 
     return PizzaData(
+        id: parsedJson['_id'],
+        imageName: parsedJson['imgName'],
+        imageDetail: parsedJson['imgDetail'],
         title: parsedJson['title'],
         description: parsedJson['description'],
         price: parsedJson['price'],

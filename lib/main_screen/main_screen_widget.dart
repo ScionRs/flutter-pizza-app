@@ -183,7 +183,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                 return Text('Error: ${snapshot.error} - ${snapshot.stackTrace}');
               }
               if(snapshot.hasData){
-                return Text('${snapshot.data![0].title} ${snapshot.data![0].size[0].size} ${snapshot.data![0].ingredients[0].title}');
+                //return Text('${snapshot.data![0].title} ${snapshot.data![0].size[0].size} ${snapshot.data![0].ingredients[0].title}');
+                List<PizzaData> products = snapshot.data!;
+                return buildPizza(products);
               } else {
                 return Text('Loading');
               }
@@ -203,7 +205,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     );
   }
 
-  /*
+
   Widget buildPizza(List<PizzaData> pizza) => ListView.builder(
       shrinkWrap: true,
       physics: BouncingScrollPhysics(),
@@ -215,7 +217,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                Image(image: AssetImage(pizzaItem.imageName),),
+                //Image(pizzaItem.imageName),
+                buildImage(pizzaItem.imageName, index),
                 SizedBox(width: 10,),
                 Expanded(
                   child: Column(
@@ -254,12 +257,12 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         );
       }
   );
-*/
+
 
   Widget buildImage(String urlImage, int index) => Container(
     margin: EdgeInsets.symmetric(horizontal: 0),
     color: Colors.grey,
-    child: Image.asset(
+    child: Image.network(
       urlImage,
       fit: BoxFit.cover,
     )
