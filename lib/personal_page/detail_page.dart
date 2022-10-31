@@ -6,7 +6,7 @@ import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/widgets/IngredientItem.dart';
 import '../main_screen/main_screen_widget.dart';
 import 'package:provider/provider.dart';
-/*
+
 const List<Widget> pizzaSize = <Widget>[
   Text('Маленькая'),
   Text('Средняя'),
@@ -21,7 +21,7 @@ const List<Widget> pizzaDough = <Widget>[
 ];
 
 
-final _listOfIngredients = [
+/*final _listOfIngredients = [
   IngredientOptionalData(
     id:1,
     imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png',
@@ -95,7 +95,7 @@ final _listOfIngredients = [
     price: 59,
   ),
 ];
-
+*/
 
 
 class DetailScreen extends StatefulWidget {
@@ -268,7 +268,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
-                        itemCount: _listOfIngredients.length,
+                        itemCount:  widget.pizzaData.ingredients.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             childAspectRatio: 0.56,
@@ -277,17 +277,17 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                         itemBuilder: (context, index){
                           return IngredientItem(
-                              key: Key(_listOfIngredients[index].price.toString()),
-                              ingredientItem: _listOfIngredients[index],
+                              key: Key(widget.pizzaData.ingredients[index].price.toString()),
+                              ingredientItem: widget.pizzaData.ingredients[index],
                               isSelected: (bool value) {
                                 setState(() {
                                   if (value){
                                     //pizzaPrice = int.parse(widget.pizzaData.price.toString());
-                                    selectedList.add(_listOfIngredients[index]);
-                                    priceSelectedList.add(int.parse(_listOfIngredients[index].price.toString()));
+                                    selectedList.add(widget.pizzaData.ingredients[index]);
+                                    priceSelectedList.add(int.parse(widget.pizzaData.ingredients[index].price.toString()));
                                   } else {
-                                    selectedList.remove(_listOfIngredients[index]);
-                                    priceSelectedList.remove(int.parse(_listOfIngredients[index].price.toString()));
+                                    selectedList.remove(widget.pizzaData.ingredients[index]);
+                                    priceSelectedList.remove(int.parse(widget.pizzaData.ingredients[index].price.toString()));
                                   }
                                 });
                               }
@@ -381,4 +381,3 @@ class _DescriptionWidget extends StatelessWidget {
     );
   }
 }
-*/

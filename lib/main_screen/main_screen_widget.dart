@@ -212,7 +212,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       itemCount: pizza.length,
       itemBuilder: (BuildContext context, int index){
         final pizzaItem = pizza[index];
-        return  Padding(
+        return GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        DetailScreen(pizzaData: pizzaItem),
+                  ));
+            },
+            child: Padding(
             padding: const EdgeInsets.only(top: 10,bottom: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,6 +262,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                 ),
               ],
             ),
+        ),
         );
       }
   );
