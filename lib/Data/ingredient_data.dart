@@ -17,7 +17,13 @@ class IngredientOptionalData{
       price: parsedJson['price'],
     );
   }
+
+  @override
+  String toString() {
+    return 'IngredientOptionalData{imgName: $imgName, title: $title, price: $price}';
   }
+
+}
 
 /*
 part 'ingredient_data.g.dart';

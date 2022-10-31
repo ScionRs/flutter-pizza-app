@@ -15,6 +15,11 @@ class SizeOptions{
         price: parsedJson['price'],
     );
   }
+
+  @override
+  String toString() {
+    return 'SizeOptions{size: $size, description: $description, price: $price}';
+  }
 }
 
 /*

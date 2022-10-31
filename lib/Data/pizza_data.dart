@@ -6,7 +6,7 @@ import 'package:pizza_app/Data/size_option.dart';
 
 @JsonSerializable()
 class PizzaData{
-  final String id;
+  String? id;
   final String imageName;
   final String imageDetail;
   final String title;
@@ -17,7 +17,7 @@ class PizzaData{
 
 
 
-  PizzaData({required this.id,  required this.imageName,required this.imageDetail, required this.title,required this.description,required this.price, required this.size, required this.ingredients});
+  PizzaData({this.id,  required this.imageName,required this.imageDetail, required this.title,required this.description,required this.price, required this.size, required this.ingredients});
   factory PizzaData.fromJson(Map<String, dynamic> parsedJson){
     var listSize = parsedJson['size'] as List;
     var listIngredients = parsedJson['ingredients'] as List;
@@ -36,6 +36,10 @@ class PizzaData{
     );
    }
 
+  @override
+  String toString() {
+    return 'toString method: PizzaData{imageName: $imageName, imageDetail: $imageDetail, title: $title, description: $description, price: $price, size: $size, ingredients: $ingredients}';
+  }
 }
 
 /*

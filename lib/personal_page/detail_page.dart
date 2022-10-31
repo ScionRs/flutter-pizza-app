@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_app/Data/ingredient_data.dart';
 import 'package:pizza_app/Data/ingredient_provider.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
+import 'package:pizza_app/Data/size_option.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/widgets/IngredientItem.dart';
 import '../main_screen/main_screen_widget.dart';
@@ -33,6 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
   final List<bool> _selectedPizzaSize = <bool>[false,true,false]; // Размер пиццы
   List<IngredientOptionalData> selectedList = [];
   List<int> priceSelectedList = [0]; // добавляю 1 или получаю BadState
+  List<SizeOptions> listSize = [];
   int result = 0;
   int pizzaPrice = 0;
   late PizzaData newPizzaData;
@@ -49,13 +51,20 @@ class _DetailScreenState extends State<DetailScreen> {
     //return pizzaPrice;
   }
 
-  /*
+
   PizzaData selectPizzaData(){
     setState(() {
-      newPizzaData = PizzaData(id: widget.pizzaData.id, imageName: imageName, imageDetail: imageDetail, title: title, description: description, price: price, size: size, ingredients: ingredients)
+      newPizzaData = PizzaData(imageName: widget.pizzaData.imageName,
+          imageDetail: widget.pizzaData.imageDetail,
+          title: widget.pizzaData.title,
+          description: widget.pizzaData.description,
+          price: reduceSum(),
+          size: listSize,
+          ingredients: selectedList);
     });
+    return newPizzaData;
   }
-*/
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,10 +139,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                     if(priceSelectedList.contains(widget.pizzaData.size[i].price)){
                                       priceSelectedList.add(0);
                                     } else{
+                                      listSize.add(widget.pizzaData.size[i]);
                                       priceSelectedList.add(widget.pizzaData.size[i].price);
                                     }
                                   } else {
                                     priceSelectedList.remove(widget.pizzaData.size[i].price);
+                                    listSize.remove(widget.pizzaData.size[i]);
                                   }
                                 }
                               });
@@ -205,7 +216,9 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             )
         ),
-        onPressed: (){},
+        onPressed: (){
+          print(selectPizzaData());
+        },
         child:
         Text('В корзину за ${reduceSum()}',
           style: TextStyle(color: Colors.white,
