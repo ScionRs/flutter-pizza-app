@@ -21,83 +21,6 @@ const List<Widget> pizzaDough = <Widget>[
 ];
 
 
-/*final _listOfIngredients = [
-  IngredientOptionalData(
-    id:1,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png',
-    title: 'Сливочная моцарелла',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:2,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/370dac9ed21e4bffaf9bc2618d258734.png',
-    title: 'Итальянские травы',
-    price: 39,
-  ),
-  IngredientOptionalData(
-    id:3,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA61B9A8D61',
-    title: 'Ветчина',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:4,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/b2f3a5d5afe44516a93cfc0d2ee60088.png',
-    title: 'Митболы',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:5,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA62D5D6027',
-    title: 'Острая чоризо',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:6,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6A277BB50',
-    title: 'Сыр блю чиз',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:7,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA6B0FFC349',
-    title: 'Кубики брынзы',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:8,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3',
-    title: 'Пикантная пепперони',
-    price: 79,
-  ),
-  IngredientOptionalData(
-    id:9,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA67259A324',
-    title: 'Шампиньоны',
-    price: 59,
-  ),
-  IngredientOptionalData(
-    id:10,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA63F774C1B',
-    title: 'Сладкий перец',
-    price: 59,
-  ),
-  IngredientOptionalData(
-    id:11,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA60AE6464C',
-    title: 'Красный лук',
-    price: 59,
-  ),
-  IngredientOptionalData(
-    id:12,
-    imgName: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0',
-    title: 'Сочные анансы',
-    price: 59,
-  ),
-];
-*/
-
-
 class DetailScreen extends StatefulWidget {
   DetailScreen({Key? key, required this.pizzaData}) : super(key: key);
   final PizzaData pizzaData;
@@ -108,11 +31,13 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   final List<bool> _selectedPizzaSize = <bool>[false,true,false]; // Размер пиццы
-  final List<bool> _selectedPizzaDough = <bool>[true,false]; // Тесто
   List<IngredientOptionalData> selectedList = [];
   List<int> priceSelectedList = [0]; // добавляю 1 или получаю BadState
   int result = 0;
   int pizzaPrice = 0;
+  late PizzaData newPizzaData;
+
+
   /*
   Все это суммирую
    */
@@ -124,13 +49,13 @@ class _DetailScreenState extends State<DetailScreen> {
     //return pizzaPrice;
   }
 
-
-  @override
-  void initState() {
-    //final result = selectedList.reduce((value, element) => value + element.price);
-    super.initState();
+  /*
+  PizzaData selectPizzaData(){
+    setState(() {
+      newPizzaData = PizzaData(id: widget.pizzaData.id, imageName: imageName, imageDetail: imageDetail, title: title, description: description, price: price, size: size, ingredients: ingredients)
+    });
   }
-
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -198,17 +123,17 @@ class _DetailScreenState extends State<DetailScreen> {
                         child: ToggleButtons(
                             onPressed: (int index){
                               setState((){
-                                for (int i = 0; i < _selectedPizzaSize.length; i++) {
+                                for (int i = 0; i < widget.pizzaData.size.length; i++) {
                                   _selectedPizzaSize[i] = i == index;
                                   //pizzaPrice = pizzaSizePrice[i];
                                   if(_selectedPizzaSize[i] = i == index){
-                                    if(priceSelectedList.contains(pizzaSizePrice[i])){
+                                    if(priceSelectedList.contains(widget.pizzaData.size[i].price)){
                                       priceSelectedList.add(0);
                                     } else{
-                                      priceSelectedList.add(pizzaSizePrice[i]);
+                                      priceSelectedList.add(widget.pizzaData.size[i].price);
                                     }
                                   } else {
-                                    priceSelectedList.remove(pizzaSizePrice[i]);
+                                    priceSelectedList.remove(widget.pizzaData.size[i].price);
                                   }
                                 }
                               });
@@ -226,38 +151,6 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           isSelected: _selectedPizzaSize,
                           children: pizzaSize,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10,),
-                    Center(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(243, 243, 247, 1),
-                            borderRadius: const BorderRadius.all(Radius.circular(5))
-                        ),
-                        child: ToggleButtons(
-                          onPressed: (int index){
-                            setState((){
-                              for (int i = 0; i < _selectedPizzaDough.length; i++) {
-                                _selectedPizzaDough[i] = i == index;
-                              }
-                            });
-                          },
-                          borderRadius: const BorderRadius.all(Radius.circular(5)),
-                          selectedColor: Colors.black,
-                          selectedBorderColor: Colors.transparent,
-                          fillColor: Colors.white,
-                          color: Colors.black,
-                          hoverColor: Colors.black,
-                          borderColor: Colors.transparent,
-                          constraints: const BoxConstraints(
-                            minHeight: 40.0,
-                            minWidth: 180.0,
-                          ),
-                          isSelected: _selectedPizzaDough,
-                          children: pizzaDough,
                         ),
                       ),
                     ),

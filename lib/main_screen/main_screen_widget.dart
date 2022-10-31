@@ -253,7 +253,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                         ),
                         onPressed: (){},
                         child:
-                        Text('${pizzaItem.price.toString()}',
+                        Text('${pizzaItem.size[0].price.toString()}',
                           style: TextStyle(color: Colors.white),
                         ),
                       )
