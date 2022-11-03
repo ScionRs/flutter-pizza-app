@@ -3,6 +3,7 @@ import 'package:pizza_app/Data/ingredient_data.dart';
 import 'package:pizza_app/Data/ingredient_provider.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
 import 'package:pizza_app/Data/size_option.dart';
+import 'package:pizza_app/router_screen/router_screen.dart';
 import 'package:pizza_app/theme/colors.dart';
 import 'package:pizza_app/widgets/IngredientItem.dart';
 import '../main_screen/main_screen_widget.dart';
@@ -230,7 +231,7 @@ class _DetailScreenState extends State<DetailScreen> {
               model.addToPizzaDataList(selectPizzaData());
               print(selectPizzaData());
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) =>  MainScreenWidget()));
+                  MaterialPageRoute(builder: (context) =>  RouterScreenWidget()));
             },
             child: Text(
               'В корзину за ${reduceSum()}',

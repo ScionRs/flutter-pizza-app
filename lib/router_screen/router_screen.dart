@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pizza_app/basket_screen/basket_screen_widget.dart';
 import 'package:pizza_app/main_screen/main_screen_widget.dart';
 
 class RouterScreenWidget extends StatefulWidget {
@@ -33,12 +34,7 @@ class _RouterScreenWidgetState extends State<RouterScreenWidget> {
              'Профиль',
            ),
          ),
-      Container(
-        alignment: Alignment.center,
-        child:  Text(
-          'Профиль',
-        ),
-      ),
+          BasketScreenWidget(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

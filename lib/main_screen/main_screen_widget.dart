@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/Data/ingredient_data.dart';
+import 'package:pizza_app/Data/size_option.dart';
 import 'package:pizza_app/api/api_client.dart';
 import 'package:pizza_app/personal_page/detail_page.dart';
 import 'package:pizza_app/theme/colors.dart';
@@ -105,6 +107,21 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   ];
 */
 
+  final _listOfPizzas = [
+  PizzaData(
+  imageName: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+  imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
+  title: 'Мясной микс',
+  description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
+  price: 519,
+    size: [SizeOptions(size: "маленькая", description: "Пицца 20x20", price: 320)],
+    ingredients: [IngredientOptionalData(id: "1",
+  imgName: "https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png",
+        title: "Моцарелла",
+        price: 79)]
+  ),
+  ];
+
   int _selectedTab = 0;
 
   void onSelectTab(int index){
@@ -180,7 +197,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             future: getAllPizzas(),
             builder: (context, snapshot){
               if(snapshot.hasError){
-                return Text('Error: ${snapshot.error} - ${snapshot.stackTrace}');
+                return buildPizza(_listOfPizzas);
               }
               if(snapshot.hasData){
                 //return Text('${snapshot.data![0].title} ${snapshot.data![0].size[0].size} ${snapshot.data![0].ingredients[0].title}');
