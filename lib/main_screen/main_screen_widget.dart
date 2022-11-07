@@ -242,7 +242,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                //Image(pizzaItem.imageName),
                 buildImage(pizzaItem.imageName, index),
                 SizedBox(width: 10,),
                 Expanded(
@@ -287,7 +286,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   Widget buildImage(String urlImage, int index) => Container(
     margin: EdgeInsets.symmetric(horizontal: 0),
-    color: Colors.grey,
+    color: Colors.white,
     child: Image.network(
       urlImage,
       fit: BoxFit.cover,

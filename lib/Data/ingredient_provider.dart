@@ -7,6 +7,9 @@ class IngredientProvider with ChangeNotifier {
   final List<PizzaData> _pizzaDataProviderList = [];
   int _resultSelectPrice = 0;
 
+
+  List<PizzaData> get pizzaDataProviderList => _pizzaDataProviderList;
+
   int get resultSelectPrice => _resultSelectPrice;
 
   List<int> get selectedPriceIngredients => _selectedPriceIngredients;
@@ -27,6 +30,9 @@ class IngredientProvider with ChangeNotifier {
     _pizzaDataProviderList.add(pizzaData);
     print("From provider: $_pizzaDataProviderList");
     notifyListeners();
+  }
+  List<PizzaData> giveThePizzaList(){
+    return pizzaDataProviderList;
   }
 
 }

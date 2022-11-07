@@ -18,7 +18,7 @@ class SizeOptions{
 
   @override
   String toString() {
-    return 'SizeOptions{size: $size, description: $description, price: $price}';
+    return '$size, $description, $price';
   }
 }
 

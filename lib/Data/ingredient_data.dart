@@ -20,7 +20,7 @@ class IngredientOptionalData{
 
   @override
   String toString() {
-    return 'IngredientOptionalData{imgName: $imgName, title: $title, price: $price}';
+    return '$title';
   }
 
 }
