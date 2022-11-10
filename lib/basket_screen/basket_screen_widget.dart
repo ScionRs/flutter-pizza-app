@@ -29,8 +29,89 @@ class _BasketScreenWidget extends State<BasketScreenWidget> {
           shrinkWrap: true,
           children: [
               buildPizza(model.giveThePizzaList()),
+            const Divider(thickness: 1.5),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              child: InfoAboutProductCount(model: model),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              child: BonusMoney(model: model),
+            ),
+            AddToFormBtn(model: model),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class InfoAboutProductCount extends StatelessWidget {
+  const InfoAboutProductCount({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+
+  final IngredientProvider model;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        const Text('Количество товаров:',  style: TextStyle(color: Colors.black, fontSize: 20.0)),
+        Text('${model.lengthProductList()}',  style: TextStyle(color: Colors.black, fontSize: 20.0)),
+      ],
+    );
+  }
+}
+
+class BonusMoney extends StatelessWidget {
+  const BonusMoney({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+
+  final IngredientProvider model;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        const Text('Начислим бонусных рублей:',  style: TextStyle(color: Colors.black, fontSize: 20.0)),
+        Text('${model.bonusMoneyFromProductList()} 👍',  style: TextStyle(color: Colors.black, fontSize: 20.0)),
+      ],
+    );
+  }
+}
+
+class AddToFormBtn extends StatelessWidget {
+  const AddToFormBtn({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+
+  final IngredientProvider model;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(Size(70, 70)),
+          backgroundColor: MaterialStateProperty.all(Colors.red),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              side: BorderSide(color: Colors.red),
+            ),
+          )),
+      onPressed: () {
+      },
+      child: Text(
+        'Оформить за ${model.reduceProductList()} ₽',
+        style: TextStyle(color: Colors.white, fontSize: 20.0),
       ),
     );
   }
@@ -76,27 +157,29 @@ Widget buildPizza(List<PizzaData> pizza) => ListView.builder(
             Divider(
               thickness: 1.5,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                _PriceButton(pizzaItem: pizzaItem),
-
-                OutlinedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.red),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          side: BorderSide(color: Colors.red),
-                        ),
-                      )),
-                  onPressed: () {},
-                  child: Text('Удалить',
-                    style: TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  _PriceButton(pizzaItem: pizzaItem),
+                  OutlinedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            side: BorderSide(color: Colors.red),
+                          ),
+                        )),
+                    onPressed: () {},
+                    child: Text('Удалить',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -114,28 +197,15 @@ class _PriceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.white),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),
-              side: BorderSide(color: Colors.white),
-            ),
-          )
-      ),
-      onPressed: (){},
-      child:
-      Text('${pizzaItem.size[0].price.toString()} ₽',
-        style: TextStyle(color: Colors.black),
-      ),
+    return Text('${pizzaItem.size[0].price.toString()} ₽',
+      style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500),
     );
   }
 }
 
 Widget buildImage(String urlImage, int index) => Container(
     margin: EdgeInsets.symmetric(horizontal: 0),
-    color: Colors.grey,
+    color: Colors.white,
     child: Image.network(
       urlImage,
       fit: BoxFit.cover,

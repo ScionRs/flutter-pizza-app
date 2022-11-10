@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:pizza_app/Data/pizza_data.dart';
 
@@ -31,8 +33,28 @@ class IngredientProvider with ChangeNotifier {
     print("From provider: $_pizzaDataProviderList");
     notifyListeners();
   }
+
   List<PizzaData> giveThePizzaList(){
     return pizzaDataProviderList;
   }
 
+  int lengthProductList(){
+    int reduce = pizzaDataProviderList.length;
+    return reduce;
+  }
+
+  int reduceProductList(){
+    int reduce = pizzaDataProviderList.fold(0,(value, element) => value + element.price);
+    return reduce;
+  }
+
+  int bonusMoneyFromProductList(){
+      int reduce = pizzaDataProviderList.fold(0, (value, element) => value + element.price);
+      if (reduce != 0) {
+        int finalSum = (reduce / 3).toInt();
+        return finalSum;
+      } else {
+        return 0;
+      }
+  }
 }
