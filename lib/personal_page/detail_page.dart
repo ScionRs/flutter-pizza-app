@@ -260,8 +260,9 @@ class _DetailScreenState extends State<DetailScreen> {
             },
             child: checkReduceSum ? Text(
               'В корзину за ${reduceSum()}',
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
-            ) : Text('В корзину за ${widget.pizzaData.size[0].price}'),
+              style: const TextStyle(color: Colors.white, fontSize: 20.0),
+            ) : Text('В корзину за ${widget.pizzaData.size[0].price}',
+              style: const TextStyle(color: Colors.white, fontSize: 20.0),),
           ),
         ));
   }
