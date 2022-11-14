@@ -62,6 +62,7 @@ class _DetailScreenState extends State<DetailScreen> {
           description: widget.pizzaData.description,
           price: reduceSum(),
           size: listSize,
+          category: widget.pizzaData.category,
           ingredients: selectedList);
     });
     return newPizzaData;

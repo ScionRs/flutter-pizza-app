@@ -139,7 +139,6 @@ class _IngredientItem extends State<IngredientItem> {
                     ),
                   )
                       : Container(),
-
                 ],
               ),
               Text('${widget.ingredientItem.title}',textAlign: TextAlign.center,),

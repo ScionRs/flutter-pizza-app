@@ -12,12 +12,13 @@ class PizzaData{
   final String title;
   final String description;
   final int price;
+  final int category;
   final List<SizeOptions> size;
   final List<IngredientOptionalData> ingredients;
 
 
 
-  PizzaData({this.id,  required this.imageName,required this.imageDetail, required this.title,required this.description,required this.price, required this.size, required this.ingredients});
+  PizzaData({this.id,  required this.imageName,required this.imageDetail, required this.title,required this.description,required this.price, required this.category, required this.size, required this.ingredients});
   factory PizzaData.fromJson(Map<String, dynamic> parsedJson){
     var listSize = parsedJson['size'] as List;
     var listIngredients = parsedJson['ingredients'] as List;
@@ -31,6 +32,7 @@ class PizzaData{
         title: parsedJson['title'],
         description: parsedJson['description'],
         price: parsedJson['price'],
+        category: parsedJson['category'],
         size: sizesList,
         ingredients: ingredientsList
     );
@@ -38,28 +40,7 @@ class PizzaData{
 
   @override
   String toString() {
-    return 'toString method: PizzaData{imageName: $imageName, imageDetail: $imageDetail, title: $title, description: $description, price: $price, size: $size, ingredients: $ingredients}';
+    return 'toString method: PizzaData{imageName: $imageName, imageDetail: $imageDetail, title: $title, description: $description, price: $price, category: $category, size: $size, ingredients: $ingredients}';
   }
 }
 
-/*
-part 'pizza_data.g.dart';
-
-@JsonSerializable()
-class PizzaData{
-  //final String id;
-  final String imageName;
-  final String imageDetail;
-  final String title;
-  final String description;
-  final int price;
-  //final List<SizeOptions> size;
-  //final List<IngredientOptionalData> ingredients;
-
-
-
-  PizzaData({/*required this.id,*/ required this.imageName,required this.imageDetail,required this.title,required this.description,required this.price, /*required this.size, required this.ingredients*/});
-  factory PizzaData.fromJson(Map<String, dynamic> json) => _$PizzaDataFromJson(json);
-  Map<String, dynamic> toJson() => _$PizzaDataToJson(this);
-}
- */
