@@ -38,6 +38,9 @@ class PizzaData{
     );
    }
 
+   int dataSumSizeElements() => this.size.length;
+
+
   @override
   String toString() {
     return 'toString method: PizzaData{imageName: $imageName, imageDetail: $imageDetail, title: $title, description: $description, price: $price, category: $category, size: $size, ingredients: $ingredients}';

@@ -72,6 +72,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     var model = context.read<IngredientProvider>();
+    bool isDataSize = widget.pizzaData.dataSumSizeElements() > 1 ? true : false;
     return ChangeNotifierProvider(
         create: (context) => IngredientProvider(),
         child: Scaffold(
@@ -84,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     height: 60,
                     width: double.infinity,
                     alignment: Alignment.center,
-                    color: Color.fromRGBO(80, 166, 132, 1),
+                    color: const Color.fromRGBO(80, 166, 132, 1),
                     child: Stack(alignment: Alignment.center, children: [
                       Align(
                           alignment: Alignment.centerLeft,
@@ -102,7 +103,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               // <-- Splash color
                             ),
                           )),
-                      Align(alignment: Alignment.center, child: LogoWidget()),
+                      const Align(alignment: Alignment.center, child: LogoWidget()),
                     ]),
                   ),
                   Image.network(
@@ -119,17 +120,17 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         _TitleWidget(widget: widget),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         _DescriptionWidget(widget: widget),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         Center(
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color.fromRGBO(243, 243, 247, 1),
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(5))),
-                            child: ToggleButtons(
+                                 BorderRadius.all(Radius.circular(5))),
+                            child: isDataSize ? ToggleButtons(
                               onPressed: (int index) {
                                 setState(() {
                                   for (int i = 0;
@@ -168,12 +169,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                               isSelected: _selectedPizzaSize,
                               children: pizzaSize,
-                            ),
+                            ) : const Text(""),
                           ),
                         ),
-                        SizedBox(height: 15.0),
-                        _AddIngredientsTitleWidget(),
-                        SizedBox(height: 15.0),
+                        const SizedBox(height: 15.0),
+                        isDataSize ? _AddIngredientsTitleWidget() : const Text(""),
+                        const SizedBox(height: 15.0),
                         GridView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
