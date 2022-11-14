@@ -34,78 +34,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     MenuButtonData('Веган'),
   ];
   List<String> listOfPictures = [
-      AppImages.event1,
-      AppImages.event2,
-      AppImages.event3,
+      "https://cdn.papajohns.ru//images/banners/396ece6c32db5efbc4a7ca2f0b5bd285.jpg",
+      "https://cdn.papajohns.ru//images/banners/31573ad2cc3b1f64ef793b1773320d2f.png",
   ];
 
-  /*
-  final _listOfPizzas = [
-    PizzaData(
-      imageName: AppImages.pizza1,
-      imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-      title: 'Мясной микс',
-      description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-      price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-    PizzaData(
-        imageName: AppImages.pizza1,
-        imageDetail: 'https://cdn.dodostatic.net/static/Img/Products/95be9fd01e6b48b288e4f27e36e70ee3_183x183.png',
-        title: 'Мясной микс',
-        description: 'Пепперони фреш,Пикантная пепперони,увеличенная порция моцареллы,томаты,фирменный томатный соус',
-        price: 519
-    ),
-  ];
-*/
 
   final _listOfPizzas = [
   PizzaData(
@@ -130,21 +62,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       _selectedTab = index;
     });
   }
-
-  /*
-   Future<List<PizzaData>> getPizzas() async {
-    List<PizzaData> products = [];
-    final response = await http.get(Uri.parse('http://localhost:3000/pizza'));
-    var data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      products = data.map((e) => PizzaData.fromJson(e)).toList();
-      return products;
-    } else {
-      products = data.map((e) => PizzaData.fromJson(e)).toList();
-      return products;
-    }
-  }
-  */
 
   List<PizzaData> allPizzasFromJson(String str) {
     final jsonData = json.decode(str);

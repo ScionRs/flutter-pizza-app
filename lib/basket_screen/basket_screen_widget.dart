@@ -17,6 +17,7 @@ class _BasketScreenWidget extends State<BasketScreenWidget> {
   @override
   Widget build(BuildContext context) {
     var model = context.read<IngredientProvider>();
+    bool isEmpty = model.lengthProductList() > 0 ? true : false;
     return ChangeNotifierProvider(
       create: (context) => IngredientProvider(),
       child: Scaffold(
@@ -28,17 +29,22 @@ class _BasketScreenWidget extends State<BasketScreenWidget> {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           shrinkWrap: true,
           children: [
-              buildPizza(model.giveThePizzaList()),
-            const Divider(thickness: 1.5),
-            Padding(
+            isEmpty ? buildPizza(model.giveThePizzaList()) :  Container(
+              alignment: Alignment.topCenter,
+              child: const Text("Корзина пуста",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+            ),
+            isEmpty ? const Divider(thickness: 1.5) : const Text(""),
+            isEmpty ? Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: InfoAboutProductCount(model: model),
-            ),
-            Padding(
+            ) : const Text(""),
+            isEmpty ? Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: BonusMoney(model: model),
-            ),
-            AddToFormBtn(model: model),
+            ) : const Text(""),
+            isEmpty ? AddToFormBtn(model: model) : const Text("")
+
+
           ],
         ),
       ),
@@ -174,7 +180,7 @@ Widget buildPizza(List<PizzaData> pizza) => ListView.builder(
                           ),
                         )),
                     onPressed: () {},
-                    child: Text('Удалить',
+                    child: const Text('Удалить',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -197,7 +203,7 @@ class _PriceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${pizzaItem.size[0].price.toString()} ₽',
+    return Text('${pizzaItem.price.toString()} ₽',
       style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500),
     );
   }
