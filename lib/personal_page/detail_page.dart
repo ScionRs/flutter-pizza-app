@@ -68,11 +68,26 @@ class _DetailScreenState extends State<DetailScreen> {
     return newPizzaData;
   }
 
+  PizzaData defaultSelectedProduct(){
+    setState(() {
+      newPizzaData = PizzaData(imageName: widget.pizzaData.imageName,
+          imageDetail: widget.pizzaData.imageDetail,
+          title: widget.pizzaData.title,
+          description: widget.pizzaData.description,
+          price: widget.pizzaData.size[0].price,
+          category: widget.pizzaData.category,
+          size: widget.pizzaData.size,
+          ingredients: []);
+    });
+    return newPizzaData;
+  }
+
 
   @override
   Widget build(BuildContext context) {
     var model = context.read<IngredientProvider>();
     bool isDataSize = widget.pizzaData.dataSumSizeElements() > 1 ? true : false;
+    bool checkReduceSum = reduceSum() > 0 ? true : false;
     return ChangeNotifierProvider(
         create: (context) => IngredientProvider(),
         child: Scaffold(
@@ -231,15 +246,22 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 )),
             onPressed: () {
-              model.addToPizzaDataList(selectPizzaData());
-              print(selectPizzaData());
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) =>  RouterScreenWidget()));
+              if(reduceSum() > 0) {
+                model.addToPizzaDataList(selectPizzaData());
+                print(selectPizzaData());
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) =>  RouterScreenWidget()));
+              } else{
+                model.addToPizzaDataList(defaultSelectedProduct());
+                print(selectPizzaData());
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) =>  RouterScreenWidget()));
+              }
             },
-            child: Text(
+            child: checkReduceSum ? Text(
               'В корзину за ${reduceSum()}',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
-            ),
+            ) : Text('В корзину за ${widget.pizzaData.size[0].price}'),
           ),
         ));
   }
