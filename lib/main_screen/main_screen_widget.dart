@@ -330,9 +330,34 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     return allPizzasFromJson(response.body);
   }
 
-  //final Future<List<PizzaData>> _listOfPizzas = ApiClient().getPizzas();
+  var _filterProductList = <PizzaData>[];
+
+  final _searchController = TextEditingController();
+
+  void _searchProduct() {
+    final query = _searchController.text;
+
+    if (query.isNotEmpty) {
+      _filterProductList = _listOfPizzas.where((PizzaData product) {
+        return product.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    }
+    else {
+     _filterProductList = _listOfPizzas;
+    }
+    setState(() {
+
+    });
+  }
 
 
+
+  @override
+  void initState() {
+    super.initState();
+    _filterProductList = _listOfPizzas;
+    _searchController.addListener(_searchProduct);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -363,13 +388,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               return buildImage(urlImage, index);
             },
     ),
-        _SearchWidget(),
+        _SearchWidget(textEditingController: _searchController,),
         FutureBuilder<List<PizzaData>>(
             future: getAllPizzas(),
             builder: (context, snapshot){
               if(snapshot.hasError){
-                return buildPizza(_listOfPizzas);
+                return buildPizza(_filterProductList);
               }
+
               if(snapshot.hasData){
                 //return Text('${snapshot.data![0].title} ${snapshot.data![0].size[0].size} ${snapshot.data![0].ingredients[0].title}');
                 List<PizzaData> products = snapshot.data!;
@@ -377,16 +403,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               } else {
                 return Text('Loading');
               }
-
-              /*
-              if (snapshot.hasData) {
-                List<PizzaData> products = snapshot.data;
-                print(products);
-                return buildPizza(products);
-              } else {
-                return const Text("Ошибка соединения");
-              }
-               */
             }),
       ],
         ),
@@ -466,8 +482,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 }
 
 class _SearchWidget extends StatelessWidget {
+  final TextEditingController textEditingController;
   const _SearchWidget({
     Key? key,
+    required this.textEditingController
   }) : super(key: key);
 
   @override
@@ -475,6 +493,7 @@ class _SearchWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
+        controller: textEditingController,
         cursorColor: AppColors.mainColor,
         decoration: InputDecoration(
           labelText: 'Поиск',
