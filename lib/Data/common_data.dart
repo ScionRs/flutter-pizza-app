@@ -276,4 +276,5 @@ class CommonData{
         size: [SizeOptions(size: "", description: "190 г", price: 169),],
         ingredients: []),
   ];
+
 }

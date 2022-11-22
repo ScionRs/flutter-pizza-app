@@ -12,7 +12,6 @@ import 'package:http/http.dart' as http;
 
 import '../Data/pizza_data.dart';
 
-
 class MainScreenWidget extends StatefulWidget {
   MainScreenWidget({Key? key}) : super(key: key);
 
@@ -93,7 +92,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               child: LogoWidget(),
             ),
           ),
-          _MenuButtonListWidget(menuButton: listOfCategories),
+          //_MenuButtonListWidget(menuButton: listOfCategories),
           _CarouselWidget(),
           _SearchWidget(textEditingController: _searchController,),
           FutureBuilder<List<PizzaData>>(
@@ -158,12 +157,12 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('$pizzaItem.title',
+                      Text('${pizzaItem.title}',
                         style: const TextStyle(fontSize:18, fontWeight: FontWeight.bold),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,),
                       const SizedBox(height: 10,),
-                      Text('$pizzaItem.description',
+                      Text('${pizzaItem.description}',
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,),
                       const SizedBox(height: 5,),
@@ -179,7 +178,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                         ),
                         onPressed: (){},
                         child:
-                        Text('$pizzaItem.size[0].price.toString()',
+                        Text('${pizzaItem.size[0].price.toString()}',
                           style: const TextStyle(color: Colors.white),
                         ),
                       )
@@ -261,7 +260,7 @@ class _MenuButtonWidget extends StatelessWidget {
     return  OutlinedButton(
         style: btnStyle,
         onPressed: () {},
-        child: Text('$menuButtonData.title'.toUpperCase(),
+        child: Text('${menuButtonData.title.toUpperCase()}',
           style: const TextStyle(
             color: AppColors.mainColor,
             fontSize: 16,
