@@ -28,12 +28,6 @@ class _RouterScreenWidgetState extends State<RouterScreenWidget> {
         index: _selectedTab,
         children: [
           MainScreenWidget(),
-         Container(
-           alignment: Alignment.center,
-           child:  Text(
-             'Профиль',
-           ),
-         ),
           BasketScreenWidget(),
         ],
       ),
@@ -45,14 +39,9 @@ class _RouterScreenWidgetState extends State<RouterScreenWidget> {
             label: 'Меню',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Профиль',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_basket),
             label: 'Корзина',
           ),
-
         ],
         onTap: onSelectTab,
       ),

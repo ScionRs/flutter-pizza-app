@@ -30,8 +30,13 @@ class _BasketScreenWidget extends State<BasketScreenWidget> {
           shrinkWrap: true,
           children: [
             isEmpty ? buildPizza(model.giveThePizzaList()) :  Container(
-              alignment: Alignment.topCenter,
-              child: const Text("Корзина пуста",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+              height: 600,
+              alignment: Alignment.center,
+              child: const Text("Корзина пуста",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0)),
             ),
             isEmpty ? const Divider(thickness: 1.5) : const Text(""),
             isEmpty ? Padding(
