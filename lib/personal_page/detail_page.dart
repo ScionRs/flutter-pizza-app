@@ -9,22 +9,16 @@ import 'package:pizza_app/widgets/IngredientItem.dart';
 import '../main_screen/main_screen_widget.dart';
 import 'package:provider/provider.dart';
 
+//Список для виджета ToggleButtons
 const List<Widget> pizzaSize = <Widget>[
   Text('Маленькая'),
   Text('Средняя'),
-  Text('Верхняя'),
-];
-
-const List<int> pizzaSizePrice = [399, 420, 600];
-
-const List<Widget> pizzaDough = <Widget>[
-  Text('Тонкое'),
-  Text('Традиционное'),
+  Text('Большая'),
 ];
 
 
 class DetailScreen extends StatefulWidget {
-  DetailScreen({Key? key, required this.pizzaData}) : super(key: key);
+ const DetailScreen({Key? key, required this.pizzaData}) : super(key: key);
   final PizzaData pizzaData;
 
   @override
@@ -32,28 +26,22 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  final List<bool> _selectedPizzaSize = <bool>[false,true,false]; // Размер пиццы
-  List<IngredientOptionalData> selectedList = [];
-  List<int> priceSelectedList = [0]; // добавляю 1 или получаю BadState
-  List<SizeOptions> listSize = [];
-  int result = 0;
-  int pizzaPrice = 0;
-  late PizzaData newPizzaData;
+  final List<bool> _selectedPizzaSize = <bool>[false,true,false]; // логическое состояние для выбранной кнопки
+  List<IngredientOptionalData> selectedList = []; // выбранные ингредиенты
+  List<int> priceSelectedList = [0]; // инициализация начальным значением или получаю BadState
+  List<SizeOptions> listSize = []; // Список для выбора размера пиццы или продукта
+  int result = 0; // сумма заказа
+  late PizzaData newPizzaData; // Обьект для нового заказа
 
-
-
-  /*
-  Все это суммирую
-   */
+  // Метод для суммирования всего заказа
   int reduceSum(){
     setState(() {
       result = priceSelectedList.reduce((value, element) => value + element);
     });
     return result;
-    //return pizzaPrice;
   }
 
-
+  // Формирование заказа на основе выбора пользователя
   PizzaData selectPizzaData(){
     setState(() {
       newPizzaData = PizzaData(imageName: widget.pizzaData.imageName,
@@ -68,6 +56,10 @@ class _DetailScreenState extends State<DetailScreen> {
     return newPizzaData;
   }
 
+  /*
+    Если пользователь не сделал конкретный выбор,
+    добавляем пиццу по умолчанию
+   */
   PizzaData defaultSelectedProduct(){
     setState(() {
       newPizzaData = PizzaData(imageName: widget.pizzaData.imageName,
@@ -91,7 +83,9 @@ class _DetailScreenState extends State<DetailScreen> {
     return ChangeNotifierProvider(
         create: (context) => IngredientProvider(),
         child: Scaffold(
-          body: ListView(physics: BouncingScrollPhysics(), children: [
+          body: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
             Container(
               width: double.infinity,
               child: Column(
@@ -113,9 +107,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             style: ElevatedButton.styleFrom(
                               shape: CircleBorder(),
                               primary: AppColors.mainColor,
-                              // <-- Button color
                               onPrimary: Colors.red,
-                              // <-- Splash color
                             ),
                           )),
                       const Align(alignment: Alignment.center, child: LogoWidget()),
@@ -140,7 +132,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         const SizedBox(height: 10.0),
                         Center(
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 5.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
                             decoration: const BoxDecoration(
                                 color: Color.fromRGBO(243, 243, 247, 1),
                                 borderRadius:
@@ -152,7 +144,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                       i < widget.pizzaData.size.length;
                                       i++) {
                                     _selectedPizzaSize[i] = i == index;
-                                    //pizzaPrice = pizzaSizePrice[i];
                                     if (_selectedPizzaSize[i] = i == index) {
                                       if (priceSelectedList.contains(
                                           widget.pizzaData.size[i].price)) {
@@ -188,15 +179,15 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 15.0),
-                        isDataSize ? _AddIngredientsTitleWidget() : const Text(""),
+                        isDataSize ? const _AddIngredientsTitleWidget() : const Text(""),
                         const SizedBox(height: 15.0),
                         GridView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             itemCount: widget.pizzaData.ingredients.length,
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                               const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               childAspectRatio: 0.56,
                               crossAxisSpacing: 6,
@@ -212,7 +203,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                   isSelected: (bool value) {
                                     setState(() {
                                       if (value) {
-                                        //pizzaPrice = int.parse(widget.pizzaData.price.toString());
                                         selectedList.add(widget
                                             .pizzaData.ingredients[index]);
                                         priceSelectedList.add(int.parse(widget
@@ -241,7 +231,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 minimumSize: MaterialStateProperty.all(Size(70, 70)),
                 backgroundColor: MaterialStateProperty.all(Colors.red),
                 shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
+                 const RoundedRectangleBorder(
                     side: BorderSide(color: Colors.red),
                   ),
                 )),
@@ -250,12 +240,12 @@ class _DetailScreenState extends State<DetailScreen> {
                 model.addToPizzaDataList(selectPizzaData());
                 print(selectPizzaData());
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) =>  RouterScreenWidget()));
+                    MaterialPageRoute(builder: (context) => const RouterScreenWidget()));
               } else{
                 model.addToPizzaDataList(defaultSelectedProduct());
                 print(selectPizzaData());
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) =>  RouterScreenWidget()));
+                    MaterialPageRoute(builder: (context) =>  const RouterScreenWidget()));
               }
             },
             child: checkReduceSum ? Text(
@@ -278,7 +268,7 @@ class _AddIngredientsTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Добавить в пиццу',
+    return const Text('Добавить в пиццу',
     style: TextStyle(
       fontSize: 18,
     ));
@@ -296,7 +286,7 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text("${widget.pizzaData.title}",
-      style: TextStyle(
+      style: const TextStyle(
           color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 26,
@@ -316,7 +306,7 @@ class _DescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text("${widget.pizzaData.description}",
-      style: TextStyle(
+      style: const TextStyle(
         fontWeight: FontWeight.bold,
         color: Colors.grey,
         wordSpacing: 2.0
