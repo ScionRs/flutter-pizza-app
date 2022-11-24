@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pizza_app/Data/ingredient_provider.dart';
+import 'package:pizza_app/order_screen/order_screen_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../Data/pizza_data.dart';
@@ -22,7 +23,7 @@ class _BasketScreenWidget extends State<BasketScreenWidget> {
       create: (context) => IngredientProvider(),
       child: Scaffold(
         appBar: AppBar(
-          title: _TitleWidget(),
+          title: const _TitleWidget(),
           backgroundColor: Colors.white,
         ),
         body: ListView(
@@ -119,6 +120,8 @@ class AddToFormBtn extends StatelessWidget {
             ),
           )),
       onPressed: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const OrderScreenWidget()));
       },
       child: Text(
         'Оформить за ${model.reduceProductList()} ₽',
