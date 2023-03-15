@@ -1,16 +1,17 @@
-# pizza_app
+# Pizza_app
+Домашний проект для освоения навыков работы с Flutter по тематике пиццы
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Основной функционал :
+ - Поиск продуктов 
+ - Множественный выбор ингредиентов
+ - Выбор размера продукта
+ - Система начисления бонусов
+  
+### Основной экран
+![main_page](images/screens/screen1.png)
+### Поиск желаемого продукта
+![search](images/screens/screen4.png)
+### Выбор ингредиентов
+![search](images/screens/screen2.png)
+### Корзина
+![search](images/screens/screen3.png)
