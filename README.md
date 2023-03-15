@@ -8,10 +8,13 @@
  - Система начисления бонусов
   
 ### Основной экран
-![main_page](images/screens/screen1.png)
-### Поиск желаемого продукта
-![search](images/screens/screen4.png)
+ <img src='images/screens/screen1.png' width='300'>    
+ 
+### Поиск желаемого продукта  
+<img src='images/screens/screen4.png' width='300'>
+
 ### Выбор ингредиентов
-![search](images/screens/screen2.png)
+ <img src='images/screens/screen2.png' width='300'>
+ 
 ### Корзина
-![search](images/screens/screen3.png)
+ <img src='images/screens/screen3.png' width='300'>
